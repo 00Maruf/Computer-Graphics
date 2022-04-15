@@ -1,0 +1,66 @@
+#include <iostream>
+#include<GL/gl.h>
+#include <GL/glut.h>
+#include <windows.h>
+#include <math.h>
+using namespace std;
+
+
+void road()
+{
+     glPushMatrix();
+    glRotatef(-90, 0.0f,0.0f ,1.0f);
+    glScalef(-1.0,1.0, 0.0);
+    glLineWidth(65.5);
+    glBegin(GL_LINES);
+        for(int i=0;i<200;i++)
+        {
+            glColor3ub(105,105,105);
+
+            float pi=3.1416;
+            float A=(i*0.75*pi)/200;
+            float r=10.15;
+            float x = r * cos(A);
+            float y = r * sin(A);
+
+
+
+            glVertex2f(-15.1+x,9.80+y );
+            glVertex2f(-15.1+x,4.80+y );
+
+
+        }
+        glEnd();
+         glPopMatrix();
+
+}
+void Uturn()
+{
+
+}
+
+static void display(void)
+{
+    glClearColor(1.0,1.0,1.0,1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    road();
+
+
+
+    glFlush();
+
+
+}
+
+int main(int argc, char** argv) {
+	glutInit(&argc, argv);
+	glutInitWindowSize(1500, 720);                 // Initialize GLUT
+	glutCreateWindow("project");
+    gluOrtho2D(-100.0,100.0,-100.0,100.0);
+	glutDisplayFunc(display);
+
+	 // Register display callback handler for window re-paint
+	glutMainLoop();           // Enter the event-processing loop
+	return 0;
+}
